@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-
-const BASE_API_URL = "@/utils/constants";
+import { BASE_API_URL } from "@/utils/constants";
 
 export interface ApiResponse<T> {
   data: T;
@@ -22,17 +21,6 @@ export const createApiProvider = (): ApiProvider => {
   const instance: CustomAxiosInstance = axios.create({
     baseURL: BASE_API_URL,
   });
-
-  instance.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error) => Promise.reject(error),
-  );
 
   const makeRequest = async <T>(
     method: keyof CustomAxiosInstance,
