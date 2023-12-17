@@ -1,4 +1,5 @@
 import { createApiProvider } from "@/providers/leitaoProvider";
+import { unstable_noStore } from "next/cache";
 
 export type ClassResponse = {
   code: string;
@@ -50,6 +51,7 @@ const getClassWithError = async (_: string): Promise<ClassResponse> => {
 };
 
 const getSlowEndpoint = async (millis: number): Promise<void> => {
+  //unstable_noStore();
   await new Promise((r) => setTimeout(r, millis));
 };
 
