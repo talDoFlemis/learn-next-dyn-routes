@@ -22,7 +22,10 @@ const getClasses = async (): Promise<ClassResponse[]> => {
   }
 };
 
-const getClassById = async (id: string, slow: number = 0): Promise<ClassResponse> => {
+const getClassById = async (
+  id: string,
+  slow: number = 0,
+): Promise<ClassResponse> => {
   const provider = createApiProvider();
   await getSlowEndpoint(slow);
   try {
@@ -32,6 +35,15 @@ const getClassById = async (id: string, slow: number = 0): Promise<ClassResponse
     console.error(error);
     throw error;
   }
+};
+
+const getClassThatMaybeDoesNotExist = async (
+  id: string,
+): Promise<ClassResponse | undefined> => {
+  if (id === "doesNotExist") {
+    return undefined;
+  }
+  return getClassById(id);
 };
 
 const getClassPreReqs = async (id: string): Promise<ClassResponse[]> => {
@@ -62,4 +74,5 @@ export {
   getClassPreReqs,
   getClassWithError,
   getSlowEndpoint,
+  getClassThatMaybeDoesNotExist
 };
