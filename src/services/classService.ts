@@ -22,8 +22,9 @@ const getClasses = async (): Promise<ClassResponse[]> => {
   }
 };
 
-const getClassById = async (id: string): Promise<ClassResponse> => {
+const getClassById = async (id: string, slow: number = 0): Promise<ClassResponse> => {
   const provider = createApiProvider();
+  await getSlowEndpoint(slow);
   try {
     const res = await provider.get<ClassResponse>(`/api/classes/${id}`);
     return res;
