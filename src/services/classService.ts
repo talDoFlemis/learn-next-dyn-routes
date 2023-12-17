@@ -1,6 +1,6 @@
 import { createApiProvider } from "@/providers/leitaoProvider";
 
-export interface ClassResponse {
+export type ClassResponse = {
   code: string;
   credits: number;
   hours: number;
@@ -8,7 +8,7 @@ export interface ClassResponse {
   prerequisites: string[];
   semester: number;
   syllabus: string;
-}
+};
 
 const getClasses = async (): Promise<ClassResponse[]> => {
   const provider = createApiProvider();
@@ -49,4 +49,14 @@ const getClassWithError = async (_: string): Promise<ClassResponse> => {
   throw new Error("This is an error");
 };
 
-export { getClasses, getClassById, getClassPreReqs, getClassWithError };
+const getSlowEndpoint = async (millis: number): Promise<void> => {
+  await new Promise((r) => setTimeout(r, millis));
+};
+
+export {
+  getClasses,
+  getClassById,
+  getClassPreReqs,
+  getClassWithError,
+  getSlowEndpoint,
+};
