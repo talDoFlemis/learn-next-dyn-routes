@@ -12,7 +12,7 @@ const Page: NextPage = async () => {
   const classes = await getClasses();
   return (
     <main className="min-h-screen flex flex-col p-6 gap-6">
-      <DumbClassCard code="CSC-301" credits={3} name="Software Engineering" />
+      <DumbClassCard code="doesNotExist" credits={3} name="Software Engineering" />
       {classes.map((c) => (
         <DumbClassCard
           key={c.code}
